@@ -233,9 +233,8 @@ end
 #
 ###############################################################################
 
-function reverse(x::ZZPolyRingElem, len::Int)
+function reverse!(z::ZZPolyRingElem, x::ZZPolyRingElem, len::Int)
   len < 0 && throw(DomainError(len, "Index must be non-negative"))
-  z = parent(x)()
   @ccall libflint.fmpz_poly_reverse(z::Ref{ZZPolyRingElem}, x::Ref{ZZPolyRingElem}, len::Int)::Nothing
   return z
 end
